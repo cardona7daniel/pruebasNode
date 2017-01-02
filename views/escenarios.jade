@@ -1,0 +1,50 @@
+extends layout
+
+block content
+    h1#h1App ESCENARIOS
+
+    div#modal.modal.fade(tabindex='-1', role='dialog')
+        .modal-dialog(role='document')
+            .modal-content
+                .modal-header
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') &times;
+
+                    h4.modal-title.text-danger ADVERTENCIA
+
+                .modal-body
+                    p ¿Está seguro de eliminar este escenario?
+
+                .modal-footer
+                    button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
+
+                    button.btn.btn-danger(type='button') Eliminar
+
+    .container
+        div#form
+            form(action='/crearescenario', method='get')
+                input.btn.btn-primary.newApp(value='Nuevo Escenario', type='submit')
+            form(action='/pasos', method='get')
+                input.btn.btn-success.continuar(value='Pasos', type='submit')
+            form(action='/', method='get')
+                input.btn.btn-info(value='Regresar', type='submit')
+
+        table#tablaApp.table
+            thead
+                tr
+                    th
+                    th Nombre
+                    th URL
+                    th Opciones
+            tbody
+                tr
+                    td
+                        button.btn.btn-default(id='#', type='submit', data-toggle="tooltip", title="Iniciar")
+                            span.glyphicon.glyphicon-play.text-primary.align-center
+
+                    td Crear
+                    td http://localhost:3000/get/post
+                    td
+                        a.separador(href='/editarescenario') Editar
+                        a.eliminar(data-toggle='modal', data-target='#modal') Eliminar
+

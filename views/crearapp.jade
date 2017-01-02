@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1#h1App CREAR APLICACIÓN
+
+    .container
+        form(action='/guardarapp', method='post')
+            .form-group
+                label(for='nombre') Nombre
+
+                input#nombre.form-control(type='text', name='nombre', placeholder='Nombre')
+
+            .form-group
+                label(for='descripcion') Descripción
+
+                textarea#descripcion.form-control(placeholder='Descripción', name='descripcion', rows='3')
+
+            button.btn.btn-primary.guardar(style='margin-bottom: 10px', type='submit') Guardar
+
+        form(action='/')
+            button.btn.btn-default(type='submit') Cancelar
+

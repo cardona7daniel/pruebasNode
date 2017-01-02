@@ -1,0 +1,81 @@
+.header{
+    background-color: #e53935;
+    color: white;
+
+}
+
+img{
+    margin: 2% 5%;
+    transition: .5s;
+}
+
+img:hover{
+    transition: .5s;
+    transform: scale(.5);
+}
+
+
+
+body{
+    margin: 0;   
+    background: #fafafa;
+}
+
+div#form{
+    display: flex;
+}
+
+span#play{
+    font-size: 24px
+}
+
+h1#h1App{
+    text-align: center;
+    color: #e53935;
+}
+
+#tablaApp{
+    margin-top: 5%;
+}
+
+.newApp{
+    margin-right: 20px;
+}
+
+.continuar{
+    margin-right: 20px;
+}
+
+
+.bordeImg{
+    border-right: solid white 1px;
+}
+
+a{
+    font-size: 16px;
+}
+
+a.separador{
+    padding-right: 8px;
+    
+}
+
+a.eliminar{
+    color: red;
+    cursor:pointer;
+}
+
+div.container{
+    margin-top: 4%;
+}
+
+
+
+#alerta{
+    position: fixed;
+    right: 10%;
+    display: none;
+
+}
+
+

@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1#h1App EDITAR APLICACIÓN
+
+    .container
+        form(action='/editarapp', method='post')
+            input(type='hidden',name='id',value='#{info[0].id}')
+            .form-group
+                label(for='nombre') Nombre
+
+                input#nombre.form-control(type='text', name='nombre', placeholder='Nombre', value='#{info[0].nombre}')
+
+            .form-group
+                label(for='descripcion') Descripción
+
+                textarea#descripcion.form-control(placeholder='Descripción', name='descripcion', rows='3') #{info[0].descripcion}
+
+            button.btn.btn-primary.guardar(style='margin-bottom: 10px', type='submit') Guardar
+
+        form(action='/')
+            button.btn.btn-default(type='submit') Cancelar

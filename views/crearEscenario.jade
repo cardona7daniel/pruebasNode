@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1#h1App CREAR ESCENARIO
+
+    .container
+        form(action='/guardarescenario', method='post')
+            .form-group
+                label(for='nombre') Nombre
+
+                input#nombre.form-control(type='text', placeholder='Nombre')
+
+            .form-group
+                label(for='url') URL
+
+                input#url.form-control(type='text', placeholder='URL')
+
+            button.btn.btn-primary(style='margin-bottom: 10px', type='submit') Guardar
+
+        form(action='/escenarios')
+            button.btn.btn-default(type='submit') Cancelar
+

@@ -1,0 +1,21 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title= title
+        link(rel='stylesheet', href='/css/style.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+        script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+        script(src='../js/js.js')
+    body
+        .row.header
+            .col-md-4.text-center.bordeImg
+                img(src='./images/logo.png', alt='Cognox Logo')
+
+            .col-md-8.text-center
+                h2 Automatización de pruebas
+
+        block content
+
+
