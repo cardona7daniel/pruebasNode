@@ -17,12 +17,12 @@ connection.connect(function (error) {
     }
 });
 
-var modelApp={};
+var modelEscenarios={};
 
-modelApp.getAll=function (callback) {
+modelEscenarios.getAll=function (callback) {
     if (connection)
     {
-        connection.query('SELECT * FROM aplicaciones', function(error, result) {
+        connection.query('SELECT * FROM escenarios', function(error, result) {
             if(error)
             {
                 throw error;
@@ -36,12 +36,12 @@ modelApp.getAll=function (callback) {
     }
 };
 
-modelApp.getApp = function(id,callback)
+modelEscenarios.getEscenario = function(id,callback)
 {
     if (connection)
     {
 
-        connection.query('SELECT * FROM aplicaciones WHERE id = ?', [id], function(error, result)
+        connection.query('SELECT * FROM escenarios WHERE id = ?', [id], function(error, result)
         {
             if(error)
             {
@@ -56,9 +56,9 @@ modelApp.getApp = function(id,callback)
     }
 };
 
-modelApp.insertApp = function(data,callback) {
+modelEscenarios.insertEscenario = function(data,callback) {
     if (connection) {
-        connection.query('INSERT INTO aplicaciones SET ?', data, function (error, result) {
+        connection.query('INSERT INTO escenarios SET ?', data, function (error, result) {
             if (error) {
                 throw error;
             }
@@ -73,12 +73,12 @@ modelApp.insertApp = function(data,callback) {
 };
 
 
-modelApp.updateApp = function(data, callback)
+modelEscenarios.updateEscenario = function(data, callback)
 {
     //console.log(userData); return;
     if(connection)
     {
-        connection.query("UPDATE aplicaciones SET nombre=?, descripcion=? WHERE  id=? ", [data.nombre, data.descripcion, data.id],function(error, result){
+        connection.query("UPDATE escenarios SET nombre=?, url=? WHERE  id=? ", [data.nombre, data.url, data.id],function(error, result){
                 if(error){
                     throw error;
                 }else{
@@ -90,12 +90,12 @@ modelApp.updateApp = function(data, callback)
     }
 };
 
-modelApp.deleteApp = function(id, callback)
+modelEscenarios.deleteEscenario = function(id, callback)
 {
     if(connection)
     {
 
-        connection.query('SELECT * FROM users WHERE id = ?', [id], function(err, row)
+        connection.query('SELECT * FROM escenarios WHERE id = ?', [id], function(err, row)
         {
             //si existe la id de la app a eliminar
             if(row)
@@ -120,4 +120,4 @@ modelApp.deleteApp = function(id, callback)
 };
 
 
-module.exports = modelApp;
+module.exports = modelEscenarios;

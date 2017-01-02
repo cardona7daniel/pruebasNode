@@ -1,4 +1,5 @@
-var model = require('./aplicaciones');
+var modelApp = require('./aplicaciones');
+var modelEscenarios = require('./escenarios');
 
 
 module.exports = function(app){
@@ -24,7 +25,7 @@ module.exports = function(app){
             nombre : req.body.nombre,
             descripcion : req.body.descripcion
         };
-        model.insertApp(formularioData,function(error, data)
+        modelApp.insertApp(formularioData,function(error, data)
         {
             //si el usuario se ha insertado correctamente mostramos su info
             if(data)
@@ -41,8 +42,8 @@ module.exports = function(app){
 
 ///////////_________________________________________________________JSON
 
-    app.get("/api", function(req,res){
-        model.getAll(function(error, data)
+    app.get("/aplicaciones", function(req,res){
+        modelApp.getAll(function(error, data)
         {
             res.json(200,data);
         });
@@ -57,7 +58,7 @@ module.exports = function(app){
         //solo actualizamos si la id es un número
         if(!isNaN(id))
         {
-            model.getApp(id,function(error, data)
+            modelApp.getApp(id,function(error, data)
             {
                 //si existe la app mostramos el formulario
                 if (typeof data !== 'undefined' && data.length > 0)
@@ -90,7 +91,7 @@ module.exports = function(app){
             descripcion: req.body.descripcion
         };
 
-        model.updateApp(userData,function(error, data)
+        modelApp.updateApp(userData,function(error, data)
         {
             //si el usuario se ha actualizado correctamente mostramos un mensaje
             if(data)
@@ -104,6 +105,10 @@ module.exports = function(app){
         });
     });
 
+    //_______________________________________________________________________________________________
+
+    //ESCENARIOS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
     app.get('/escenarios', function (req, res) {
         res.render('escenarios', {
             title: "Escenarios"
@@ -116,11 +121,92 @@ module.exports = function(app){
         });
     });
 
-    app.get('/editarescenario', function (req, res) {
-        res.render('editarEscenario', {
-            title: "Editar escenario"
+    app.post("/guardarescenario", function (req, res) {
+        var formularioData = {
+            id:null,
+            nombre : req.body.nombre,
+            url : req.body.url
+        };
+        modelEscenarios.insertEscenario(formularioData,function(error, data)
+        {
+            //si el usuario se ha insertado correctamente mostramos su info
+            if(data)
+            {
+                res.redirect("/escenarios");
+            }
+            else
+            {
+                res.json(500,{"msg":"Error"});
+            }
         });
     });
+
+    // app.get('/editarescenario', function (req, res) {
+    //     res.render('editarEscenario', {
+    //         title: "Editar escenario"
+    //     });
+    // });
+
+    app.get("/apiescenarios", function(req,res){
+        modelEscenarios.getAll(function(error, data)
+        {
+            res.json(200,data);
+        });
+    });
+
+    app.get("/editarescenario/:id", function(req, res){
+
+        var id = req.params.id;
+
+        modelEscenarios.getEscenario(id,function(error, data)
+        {
+            //si existe la app mostramos el formulario
+            if (typeof data !== 'undefined' && data.length > 0)
+            {
+                res.render("editarEscenario",{
+                    title : "Editar Escenario",
+                    info : data
+                });
+            }
+            //en otro caso mostramos un error
+            else
+            {
+                res.json(404,{"msg":"notExist"});
+            }
+        });
+    });
+
+    app.post("/editarescenario", function (req, res) {
+        //almacenamos los datos del formulario en un objeto
+        var userData = {
+            id:req.body.id,
+            nombre: req.body.nombre,
+            url: req.body.url
+        };
+
+        modelEscenarios.updateEscenario(userData,function(error, data)
+        {
+            //si el usuario se ha actualizado correctamente mostramos un mensaje
+            if(data)
+            {
+                res.redirect("/escenarios");
+            }
+            else
+            {
+                res.json(500, error);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
     app.get('/pasos', function (req, res) {
         res.render('pasos', {
