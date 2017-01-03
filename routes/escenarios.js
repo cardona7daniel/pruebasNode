@@ -9,13 +9,6 @@ var connection = mysql.createConnection({
     port: 3306
 });
 
-connection.connect(function (error) {
-    if (error) {
-        throw error;
-    } else {
-        console.log('Conexion correcta.');
-    }
-});
 
 var modelEscenarios={};
 
@@ -100,7 +93,7 @@ modelEscenarios.deleteEscenario = function(id, callback)
             //si existe la id de la app a eliminar
             if(row)
             {
-                connection.query("DELETE FROM registros WHERE id=? ", [id],function(error, result){
+                connection.query("DELETE FROM escenarios WHERE id=? ", [id],function(error, result){
                         if(error){
                             throw error;
                         }else{

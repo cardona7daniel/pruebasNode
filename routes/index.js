@@ -1,5 +1,6 @@
 var modelApp = require('./aplicaciones');
 var modelEscenarios = require('./escenarios');
+var modelPasos = require('./pasos');
 
 
 module.exports = function(app){
@@ -141,11 +142,6 @@ module.exports = function(app){
         });
     });
 
-    // app.get('/editarescenario', function (req, res) {
-    //     res.render('editarEscenario', {
-    //         title: "Editar escenario"
-    //     });
-    // });
 
     app.get("/apiescenarios", function(req,res){
         modelEscenarios.getAll(function(error, data)
@@ -198,11 +194,21 @@ module.exports = function(app){
         });
     });
 
+    app.post("/eliminarescenario/:id", function (req, res) {
+        var id = req.params.id;
 
-
-
-
-
+        modelEscenarios.deleteEscenario(id,function(error, data)
+        {
+            if(data)
+            {
+                res.redirect("/escenarios");
+            }
+            else
+            {
+                res.json(500,{"msg":"Error"});
+            }
+        });
+    });
 
 
 
@@ -213,5 +219,70 @@ module.exports = function(app){
             title: "Pasos"
         });
     });
+
+    app.post("/guardarpasos", function (req, res) {
+        var formularioData = {
+            id:null,
+            elemento : req.body.elemento,
+            valor : req.body.valor,
+            tipo: req.body.tipo,
+            nombre: 'crear'
+        };
+
+        modelPasos.insertPasos(formularioData,function(error, data)
+        {
+            //si el usuario se ha insertado correctamente mostramos su info
+            if(data)
+            {
+                res.redirect("/pasos");
+            }
+            else
+            {
+                res.json(500,{"msg":"Error"});
+            }
+        });
+    });
+
+    app.post("/eliminar/:id", function (req, res) {
+        var id = req.params.id;
+
+        modelPasos.deletePasos(id,function(error, data)
+        {
+            if(data)
+            {
+                res.redirect("/pasos");
+            }
+            else
+            {
+                res.json(500,{"msg":"Error"});
+            }
+        });
+    });
+
+
+    app.get("/apipasos", function(req,res){
+        modelPasos.getAll(function(error, data)
+        {
+            res.json(200,data);
+        });
+    });
+
+
+    // app.get('/eliminar', function (req, res) {
+    //
+    //     var nombre = req.query.nombre || '';
+    //
+    //     res.send('<html><body>'
+    //         + '<h1>dddd</h1>'
+    //
+    //         + '<form method="get" action="/saludo">'
+    //         + '<label for="nombre">¿Cómo te llamas?</label>'
+    //         + '<input type="text" name="nombre" id="nombre">'
+    //         + '<input type="submit" value="Enviar"/>'
+    //         + '</form>'
+    //         + '</body></html>');
+    //
+    // });
+
 
 };

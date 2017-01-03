@@ -9,20 +9,13 @@ var connection = mysql.createConnection({
     port: 3306
 });
 
-connection.connect(function (error) {
-    if (error) {
-        throw error;
-    } else {
-        console.log('Conexion correcta.');
-    }
-});
 
-var modelApp={};
+var modelPasos={};
 
-modelApp.getAll=function (callback) {
+modelPasos.getAll=function (callback) {
     if (connection)
     {
-        connection.query('SELECT * FROM aplicaciones', function(error, result) {
+        connection.query('SELECT * FROM pasos', function(error, result) {
             if(error)
             {
                 throw error;
@@ -36,12 +29,12 @@ modelApp.getAll=function (callback) {
     }
 };
 
-modelApp.getApp = function(id,callback)
+modelPasos.getPasos = function(id,callback)
 {
     if (connection)
     {
 
-        connection.query('SELECT * FROM aplicaciones WHERE id = ?', [id], function(error, result)
+        connection.query('SELECT * FROM pasos WHERE id = ?', [id], function(error, result)
         {
             if(error)
             {
@@ -56,9 +49,9 @@ modelApp.getApp = function(id,callback)
     }
 };
 
-modelApp.insertApp = function(data,callback) {
+modelPasos.insertPasos = function(data,callback) {
     if (connection) {
-        connection.query('INSERT INTO aplicaciones SET ?', data, function (error, result) {
+        connection.query('INSERT INTO pasos SET ?', data, function (error, result) {
             if (error) {
                 throw error;
             }
@@ -73,12 +66,12 @@ modelApp.insertApp = function(data,callback) {
 };
 
 
-modelApp.updateApp = function(data, callback)
+modelPasos.updatePasos = function(data, callback)
 {
     //console.log(userData); return;
     if(connection)
     {
-        connection.query("UPDATE aplicaciones SET nombre=?, descripcion=? WHERE  id=? ", [data.nombre, data.descripcion, data.id],function(error, result){
+        connection.query("UPDATE pasos SET elemento=?, valor=?, tipo=?, nombre=? WHERE  id=? ", [data.elemento, data.valor, data.tipo, data.nombre, data.id],function(error, result){
                 if(error){
                     throw error;
                 }else{
@@ -90,17 +83,17 @@ modelApp.updateApp = function(data, callback)
     }
 };
 
-modelApp.deleteApp = function(id, callback)
+modelPasos.deletePasos = function(id, callback)
 {
     if(connection)
     {
 
-        connection.query('SELECT * FROM aplicaciones WHERE id = ?', [id], function(err, row)
+        connection.query('SELECT * FROM pasos WHERE id = ?', [id], function(err, row)
         {
             //si existe la id de la app a eliminar
             if(row)
             {
-                connection.query("DELETE FROM aplicaciones WHERE id=? ", [id],function(error, result){
+                connection.query("DELETE FROM pasos WHERE id=? ", [id],function(error, result){
                         if(error){
                             throw error;
                         }else{
@@ -120,4 +113,4 @@ modelApp.deleteApp = function(id, callback)
 };
 
 
-module.exports = modelApp;
+module.exports = modelPasos;
