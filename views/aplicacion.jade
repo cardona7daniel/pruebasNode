@@ -3,28 +3,29 @@ extends layout
 block content
     h1#h1App APLICACIONES
 
-    .container
-        #alerta.alert.alert-success.alert-dismissible(role='alert')
-            button.close(type='button', data-dismiss='alert', aria-label='Close')
-                span(aria-hidden='true') &times;
-            strong Los datos se han guardado correctamente...
 
+    //#alerta.alert.alert-success.alert-dismissible(role='alert')
+    //    button.close(type='button', data-dismiss='alert', aria-label='Close')
+    //        span(aria-hidden='true') &times;
+    //    strong Los datos se han guardado correctamente...
+
+    .container
         div#form
             form(action='/crearapp', method='get')
                 input.btn.btn-primary.newApp(value='Nueva Aplicación', type='submit')
 
             form(action='/escenarios', method='get')
-                input.btn.btn-success(value='Continuar', type='submit')
+                input.btn.btn-success(value='Escenarios', type='submit')
 
 
-        table#tablaApp.aplicacion.table
-            thead
-                tr
-                    th Nombre
-                    th Descripción
-                    th Opciones
+    table#tablaApp.aplicacion.table
+        thead
+            tr
+                th Nombre
+                th Descripción
+                th Opciones
 
-            tbody
+        tbody
 
 
 

@@ -35,7 +35,13 @@ h1#h1App{
 }
 
 #tablaApp{
-    margin-top: 5%;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+#tablaPasos{
+    margin-top: 3%;
+
 }
 
 .newApp{
@@ -55,13 +61,22 @@ a{
     font-size: 16px;
 }
 
-a.separador{
-    padding-right: 8px;
-    
+a.separador{ 
+    padding-left: 8px;
+
 }
 
+form.a{
+    display: inline;
+}
+ 
 a.eliminar{
     color: red;
+    cursor:pointer;
+}
+
+a.eliminar:hover{
+    color: #76060f;
     cursor:pointer;
 }
 
@@ -78,4 +93,11 @@ div.container{
 
 }
 
+#gPasos{
+    color: #2922ff;
+}
+
+.error{
+    color: red;
+}
 

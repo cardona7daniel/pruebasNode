@@ -17,13 +17,14 @@ block content
 
                 .modal-footer
                     button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
-
-                    button.btn.btn-danger(type='button') Eliminar
+                    button.btn.btn-danger.eliminarPaso(type='submit') Eliminar
 
     .container
         form(action='/escenarios', method='get')
             input.btn.btn-info(value='Regresar', type='submit')
-        table#tablaApp.table
+
+    form(action='/guardarpasos', method='post')
+        table#tablaPasos.table.pasos
             thead
                 tr
                     th.text-center Elemento
@@ -40,24 +41,19 @@ block content
                             input#valor.form-control(name='valor', type='text', placeholder='Valor')
                     th
                         .form-group
-                            select#tipo.form-control
-                                option
-                                option Button
+                            select#tipo.form-control(name='tipo')
                                 option Check_Box
+                                option Click
                                 option Date
                                 option Number
                                 option Password
                                 option Radio
+                                option See
                                 option Select
                                 option Text
-                                option see
+
                     th.text-center
                         .form-group
-                            a(href='/guardarpaso') Guardar
+                            button#gPasos.btn.btn-default(type='submit') Guardar
             tbody
-                tr
-                    td.text-center #nombre
-                    td.text-center DanielC
-                    td.text-center Text
-                    td.text-center
-                        a.eliminar(data-toggle='modal', data-target='#modal') Eliminar
+                //Pasos

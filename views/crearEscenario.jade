@@ -4,18 +4,18 @@ block content
     h1#h1App CREAR ESCENARIO
 
     .container
-        form(action='/guardarescenario', method='post')
+        form#crearescenario(action='/guardarescenario', method='post')
             .form-group
                 label(for='nombre') Nombre
 
-                input#nombre.form-control(type='text', placeholder='Nombre')
+                input#nombre.form-control.required(type='text', name='nombre' ,placeholder='Nombre')
 
             .form-group
                 label(for='url') URL
 
-                input#url.form-control(type='text', placeholder='URL')
+                input#url.form-control.required(type='text', name='url' ,placeholder='URL')
 
-            button.btn.btn-primary(style='margin-bottom: 10px', type='submit') Guardar
+            button.btn.btn-primary.guardarapp(style='margin-bottom: 10px', type='submit') Guardar
 
         form(action='/escenarios')
             button.btn.btn-default(type='submit') Cancelar
