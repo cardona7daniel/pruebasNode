@@ -8,13 +8,13 @@ block content
             div.errores
             .form-group
                 label(for='nombre') Nombre
-                input#nombre.form-control.required(type='text', name='nombre', placeholder='Nombre')
+                input#nombre.form-control(type='text', name='nombre', placeholder='Nombre')
 
             .form-group
                 label(for='descripcion') Descripción
-                textarea#descripcion.form-control.required(placeholder='Descripción', name='descripcion', rows='3')
+                textarea#descripcion.form-control(placeholder='Descripción', name='descripcion', rows='3')
 
-            button.btn.btn-primary.guardar.guardarapp(style='margin-bottom: 10px', type='submit') Guardar
+            button#gApp.btn.btn-primary.guardar(style='margin-bottom: 10px', type='submit') Guardar
 
         form(action='/')
             button.btn.btn-default(type='submit') Cancelar

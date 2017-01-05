@@ -63,11 +63,11 @@ a{
 
 a.separador{ 
     padding-left: 8px;
-
 }
 
 form.a{
     display: inline;
+    padding-left: 8px;
 }
  
 a.eliminar{

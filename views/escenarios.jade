@@ -3,22 +3,7 @@ extends layout
 block content
     h1#h1App ESCENARIOS
 
-    div#modal.modal.fade(tabindex='-1', role='dialog')
-        .modal-dialog(role='document')
-            .modal-content
-                .modal-header
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') &times;
-
-                    h4.modal-title.text-danger ADVERTENCIA
-
-                .modal-body
-                    p ¿Está seguro de eliminar este escenario?
-
-                .modal-footer
-                    button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
-
-                    button.btn.btn-danger(type='button') Eliminar
+    div#modalEscenario
 
     .container
         div#form

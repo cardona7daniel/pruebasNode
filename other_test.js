@@ -43,7 +43,11 @@ Scenario('Crear', function(I) {
     var age=chance.age();
     var password=chance.string({length: 7});
     var telefono=chance.phone({ formatted: false });
-
+    var date=chance.date({string: true, american: false});
+    var email=chance.email();
+    var direccion=chance.address();
+    var ciudad=chance.city();
+    var year=chance.year();
 
 
     I.amOnPage(rutas[0].url);
@@ -56,6 +60,12 @@ Scenario('Crear', function(I) {
                 switch(array[i].valor){
                     case 'nombre':
                         I.fillField(array[i].elemento, name);
+                        break;
+                    case 'direccion':
+                        I.fillField(array[i].elemento, direccion);
+                        break;
+                    case 'ciudad':
+                        I.fillField(array[i].elemento, ciudad);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -75,6 +85,26 @@ Scenario('Crear', function(I) {
             case 'Check_Box':
                 I.checkOption(array[i].elemento);
                 break;
+            case 'Date':
+                switch(array[i].valor){
+                    case 'date':
+                        I.fillField(array[i].elemento, date);
+                        break;
+                    default:
+                        I.fillField(array[i].elemento, array[i].valor);
+                        break;
+                }
+                break;
+            case 'Email':
+                switch(array[i].valor){
+                    case 'email':
+                        I.fillField(array[i].elemento, email);
+                        break;
+                    default:
+                        I.fillField(array[i].elemento, array[i].valor);
+                        break;
+                }
+                break;
             case 'Radio':
                 I.checkOption(array[i].elemento);
                 break;
@@ -88,6 +118,9 @@ Scenario('Crear', function(I) {
                         break;
                     case 'telefono':
                         I.fillField(array[i].elemento, telefono.toString());
+                        break;
+                    case 'year':
+                        I.fillField(array[i].elemento, year);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);

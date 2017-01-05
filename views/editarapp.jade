@@ -7,16 +7,16 @@ block content
         form#editarapp(action='/editarapp', method='post')
             input(type='hidden',name='id',value='#{info[0].id}')
             .form-group
-                label(for='nombre') Nombre
+                label(for='nombreE') Nombre
 
-                input#nombre.form-control.required(type='text', name='nombre', placeholder='Nombre', value='#{info[0].nombre}')
+                input#nombreE.form-control.nombre(type='text', name='nombre', placeholder='Nombre', value='#{info[0].nombre}')
 
             .form-group
                 label(for='descripcion') Descripción
 
-                textarea#descripcion.form-control.required(placeholder='Descripción', name='descripcion', rows='3') #{info[0].descripcion}
+                textarea#descripcion.form-control.descripcion(placeholder='Descripción', name='descripcion', rows='3') #{info[0].descripcion}
 
-            button.btn.btn-primary.guardar.guardarapp(style='margin-bottom: 10px', type='submit') Guardar
+            button.eApp.btn.btn-primary.guardar(style='margin-bottom: 10px', type='submit') Guardar
 
         form(action='/')
             button.btn.btn-default(type='submit') Cancelar

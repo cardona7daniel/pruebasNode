@@ -3,21 +3,7 @@ extends layout
 block content
     h1#h1App PASOS ESCENARIO
 
-    div#modal.modal.fade(tabindex='-1', role='dialog')
-        .modal-dialog(role='document')
-            .modal-content
-                .modal-header
-                    button.close(type='button', data-dismiss='modal', aria-label='Close')
-                        span(aria-hidden='true') &times;
-
-                    h4.modal-title.text-danger ADVERTENCIA
-
-                .modal-body
-                    p ¿Está seguro de eliminar este paso?
-
-                .modal-footer
-                    button.btn.btn-default(type='button', data-dismiss='modal') Cerrar
-                    button.btn.btn-danger.eliminarPaso(type='submit') Eliminar
+    div#modalPasos
 
     .container
         form(action='/escenarios', method='get')
@@ -48,6 +34,7 @@ block content
                                 option Check_Box
                                 option Click
                                 option Date
+                                option Email
                                 option Number
                                 option Password
                                 option Radio
