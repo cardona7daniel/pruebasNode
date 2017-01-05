@@ -4,8 +4,6 @@ var bodyParser=require("body-parser");
 var path = require('path');
 var app=express();
 
-var model = require('./routes/aplicaciones');
-
 var port=process.env.PORT || 3000;
 
 app.use(bodyParser.json());
@@ -23,3 +21,4 @@ app.listen(port, function () {
 });
 
 module.exports=app;
+

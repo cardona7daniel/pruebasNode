@@ -71,9 +71,88 @@ $(function () {
         });
     });
 
+    $(".tr").find("th").css("vertical-align", "top");
+
+
+
+    function validarPasosGuardar() {
+        let valor=$("#valor");
+        let elemento=$("#elemento");
+
+        jQuery.validator.messages.required= 'Al menos un campo es obligatorio.';
+        $("#guardarPasos").validate();
+
+        elemento.change(function() {
+            valor.removeClass("required borderp");
+            elemento.removeClass("required borderp");
+            $("#valor-error").remove();
+        });
+
+        valor.change(function() {
+            valor.removeClass("required borderp");
+            elemento.removeClass("required borderp");
+            $("#elemento-error").remove();
+        });
+    }
+
+    function validarPasosGuardar2(){
+        let valor=$("#valor");
+        let elemento=$("#elemento");
+        jQuery.validator.messages.required= 'Este campo es obligatorio.';
+        $("#guardarPasos").validate();
+
+        elemento.change(function() {
+            elemento.removeClass("required borderp");
+            $("#elemento-error").remove();
+        });
+
+        valor.change(function() {
+            valor.removeClass("required borderp");
+            $("#valor-error").remove();
+        });
+    }
+
+
+    function validarPasosEditar() {
+        let valor=$(".valor");
+        let elemento=$(".elemento");
+
+        jQuery.validator.messages.required= 'Al menos un campo es obligatorio.';
+        $("#editarPasos").validate();
+
+        elemento.change(function() {
+            valor.removeClass("required borderp");
+            elemento.removeClass("required borderp");
+            $("#valor-error").remove();
+        });
+
+        valor.change(function() {
+            valor.removeClass("required borderp");
+            elemento.removeClass("required borderp");
+            $("#elemento-error").remove();
+        });
+    }
+
+    function validarPasosEditar2(){
+        let valor=$(".valor");
+        let elemento=$(".elemento");
+        jQuery.validator.messages.required= 'Este campo es obligatorio.';
+        $("#editarPasos").validate();
+
+        elemento.change(function() {
+            elemento.removeClass("required borderp");
+            $("#elemento-error").remove();
+        });
+
+        valor.change(function() {
+            valor.removeClass("required borderp");
+            $("#valor-error").remove();
+        });
+    }
+
+
     function validarFormulario(){
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
-        jQuery.validator.messages.url= 'Ingrese una url valida.';
         // jQuery.validator.messages.number = 'Esta campo debe ser num&eacute;rico.';
         // jQuery.validator.messages.email = 'La direcci&oacute;n de correo es incorrecta.';
         $("#crearapp").validate();
@@ -85,6 +164,50 @@ $(function () {
     $(".guardarapp").click(function () {
         validarFormulario();
     });
+
+
+
+    $("#gPasos").click(function () {
+        let tipo=$("#tipo");
+        let valor=$("#valor");
+        let elemento=$("#elemento");
+
+        if (tipo.val() == "Click" || tipo.val() == "See") {
+            if (elemento.val() == "" && valor.val() == "") {
+                elemento.addClass("required borderp");
+                valor.addClass("required borderp");
+                validarPasosGuardar();
+            }
+        }else if(tipo.val() != "Click" || tipo.val() != "See"){
+            if (elemento.val() == "" && valor.val() == "") {
+                elemento.addClass("required borderp");
+                valor.addClass("required borderp");
+                validarPasosGuardar2();
+            }
+        }
+    });
+
+    $(".ePasos").click(function () {
+        let tipo=$(".tipo");
+        let valor=$(".valor");
+        let elemento=$(".elemento");
+
+        if (tipo.val() == "Click" || tipo.val() == "See") {
+            if (elemento.val() == "" && valor.val() == "") {
+                elemento.addClass("required borderp");
+                valor.addClass("required borderp");
+                validarPasosEditar();
+            }
+        }else if(tipo.val() != "Click" || tipo.val() != "See"){
+            if (elemento.val() == "" && valor.val() == "") {
+                elemento.addClass("required borderp");
+                valor.addClass("required borderp");
+                validarPasosEditar2();
+            }
+        }
+    });
+
+
 
 
 

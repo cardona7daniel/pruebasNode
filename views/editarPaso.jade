@@ -4,20 +4,20 @@ block content
     h1#h1App EDITAR PASO
 
     .container
-        form(action='/editarpaso', method='post')
+        form#editarPasos(action='/editarpaso', method='post')
             input(type='hidden',name='id',value='#{info[0].id}')
             .form-group
                 label(for='elemento') Elemento
-                input#elemento.form-control(type='text', placeholder='Elemento', name='elemento', value='#{info[0].elemento}')
+                input#elemento.form-control.elemento(type='text', placeholder='Elemento', name='elemento', value='#{info[0].elemento}')
 
             .form-group
                 label(for='valor') Valor
-                input#valor.form-control(type='text', placeholder='Valor', name='valor', value='#{info[0].valor}')
+                input#valor.form-control.valor(type='text', placeholder='Valor', name='valor', value='#{info[0].valor}')
 
             .form-group
                 label(for='Tipo') Valor
-                select#tipo.form-control(name='tipo')
-                    option(value='#{info[0].tipo}')
+                select#tipo.form-control.tipo(name='tipo')
+                    option(value='#{info[0].tipo}') #{info[0].tipo}
                     option Check_Box
                     option Click
                     option Date
@@ -28,7 +28,7 @@ block content
                     option Select
                     option Text
 
-            button.btn.btn-primary(style='margin-bottom: 10px', type='submit') Guardar
+            button.ePasos.btn.btn-primary(style='margin-bottom: 10px', type='submit') Guardar
 
         form(action='/pasos')
             button.btn.btn-default(type='submit') Cancelar
