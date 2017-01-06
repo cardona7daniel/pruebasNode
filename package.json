@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {},
   "devDependencies": {
-    "codeceptjs": "^0.4.13"
+    "codeceptjs": "^0.4.13",
+    "mochawesome": "^2.0.0"
   },
   "scripts": {
     "start": "nodemon app.js",

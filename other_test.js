@@ -23,19 +23,11 @@ modelPasos.getAll(function (error, data) {
     resultado=data;
 });
 
-// var resultado;
-// connection.query("SELECT * FROM pasos", function (error, result) {
-//             if (error) {
-//                 throw error;
-//             } else {
-//                 resultado=result;
-//             }
-// });
 
 Feature('Formulario');
 
 Before(function (I) {
-    I.amOnPage("http://localhost:3001");
+    I.amOnPage("https://www.google.com.co/");
 });
 
 Scenario('Crear', function(I) {

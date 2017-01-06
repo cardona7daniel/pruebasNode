@@ -112,5 +112,17 @@ modelPasos.deletePasos = function(id, callback)
     }
 };
 
+modelPasos.getEscenariosPasos=function (id, callback) {
+    if(connection){
+        connection.query('SELECT p.elemento, p.valor, p.tipo, p.nombre FROM pasos p JOIN escenarios e ON p.nombre = e.nombre WHERE p.id=?', [id], function(err, result){
+            if(error){
+                throw error;
+            }else{
+                console.log(result);
+                callback(null, {"msg": "Success"});
+            }
+        });
+    }
+};
 
 module.exports = modelPasos;

@@ -8,6 +8,8 @@ block content
     .container
         form(action='/escenarios', method='get')
             input.btn.btn-info(value='Regresar', type='submit')
+        hr(size='2px', style='border-top: 2px solid #eee')
+
 
     form#guardarPasos(action='/guardarpasos', method='post')
         table#tablaPasos.table.pasos
@@ -17,6 +19,7 @@ block content
                     th.text-center Valor
                     th.text-center Tipo
                     th.text-center Opciones
+
 
 
                 tr.tr
@@ -45,6 +48,7 @@ block content
                     th.text-center
                         .form-group
                             button#gPasos.gPasos.btn.btn-default(type='submit') Guardar
+
 
 
 
