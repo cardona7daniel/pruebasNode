@@ -112,6 +112,18 @@ modelEscenarios.deleteEscenario = function(id, callback)
     }
 };
 
+modelEscenarios.getEscenariosApp=function (id, callback) {
+    if(connection){
+        connection.query('SELECT escenarios.nombre, escenarios.url FROM aplicaciones JOIN escenarios ON aplicaciones.nombre = escenarios.nombreApp  WHERE  aplicaciones.id=?', [id],  function(err, result){
+            if(error){
+                throw error;
+            }else{
+                console.log(result);
+                callback(null, result);
+            }
+        });
+    }
+};
 
 
 

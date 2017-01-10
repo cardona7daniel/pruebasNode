@@ -2,9 +2,8 @@
 $(function () {
 
     // API´s - Mostrar datos de las tablas   :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
+    let idApp=0;
     $.getJSON("http://localhost:3000/aplicaciones", function(data){
-
         let id=0;
         $.each(data, function(i, v){
             id=v.id;
@@ -49,7 +48,6 @@ $(function () {
             $("table.escenario").find("tbody").append("<tr>" +
                 "<td><form action='/mochawesome.html' target='_blank' method='get'><button class='btn btn-default' id='#' type='submit' data-toggle='tooltip' title='Iniciar'><span class='glyphicon glyphicon-play text-primary align-center'></span></button></form></td>" +
                 "<td>" + v.nombre + " </td>" +
-                "<td><input type='checkbox'></td>" +
                 "<td>" + v.url + "</td>" +
                 "<td>" +
                 "<a class='eliminar' data-toggle='modal' data-target='#modal'>Eliminar</a>"+

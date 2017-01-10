@@ -142,6 +142,18 @@ module.exports = function(app){
 
     //ESCENARIOS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
+    app.get("/apiescenarios", function(req,res){
+        modelEscenarios.getAll(function(error, data)
+        {
+            res.json(200,data);
+        });
+    });
+
+
+
+
+
+
     app.get('/escenarios', function (req, res) {
         res.render('escenarios', {
             title: "Escenarios"
@@ -158,7 +170,8 @@ module.exports = function(app){
         var formularioData = {
             id:null,
             nombre : req.body.nombre,
-            url : req.body.url
+            url : req.body.url,
+            nombreApp: 'Sofasa'
         };
 
         if(req.body.nombre != "" && req.body.url != ""){
@@ -182,13 +195,13 @@ module.exports = function(app){
 
     });
 
+    // app.get("/apiescenarios", function(req,res){
+    //         modelEscenarios.getAll(function(error, data)
+    //         {
+    //             res.json(200,data);
+    //         });
+    //     });
 
-    app.get("/apiescenarios", function(req,res){
-        modelEscenarios.getAll(function(error, data)
-        {
-            res.json(200,data);
-        });
-    });
 
     app.get("/editarescenario/:id", function(req, res){
 
@@ -273,7 +286,8 @@ module.exports = function(app){
             elemento : req.body.elemento,
             valor : req.body.valor,
             tipo: req.body.tipo,
-            nombre: 'crear'
+            nombre: 'crear',
+
         };
 
         if(req.body.tipo == "Click" || req.body.tipo == "See"){
