@@ -4,8 +4,8 @@ $(function () {
 
 
     $("#gApp").click(function () {
-        let nombre=$("#nombre");
-        let descripcion=$("#descripcion");
+        var nombre=$("#nombre");
+        var descripcion=$("#descripcion");
 
         if (nombre.val() == "" && descripcion.val() == "") {
             nombre.addClass("required borderp");
@@ -23,8 +23,8 @@ $(function () {
     });
 
     function validarAppGuardar() {
-        let nombre=$("#nombre");
-        let descripcion=$("#descripcion");
+        var nombre=$("#nombre");
+        var descripcion=$("#descripcion");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearapp").validate();
 
@@ -40,7 +40,7 @@ $(function () {
     }
 
     function validarAppGuardar2() {
-        let nombre=$("#nombre");
+        var nombre=$("#nombre");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearapp").validate();
 
@@ -52,7 +52,7 @@ $(function () {
     }
 
     function validarAppGuardar3() {
-        let descripcion=$("#descripcion");
+        var descripcion=$("#descripcion");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearapp").validate();
 
@@ -66,8 +66,8 @@ $(function () {
 
 
     $(".eApp").click(function () {
-        let nombre=$(".nombre");
-        let descripcion=$(".descripcion");
+        var nombre=$(".nombre");
+        var descripcion=$(".descripcion");
 
         if (nombre.val() == "" && descripcion.val() == "") {
             nombre.addClass("required borderp");
@@ -86,8 +86,8 @@ $(function () {
     });
 
     function validarAppEditar() {
-        let nombre=$(".nombre");
-        let descripcion=$(".descripcion");
+        var nombre=$(".nombre");
+        var descripcion=$(".descripcion");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarapp").validate();
 
@@ -103,7 +103,7 @@ $(function () {
     }
 
     function validarAppEditar2() {
-        let nombre=$(".nombre");
+        var nombre=$(".nombre");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarapp").validate();
 
@@ -114,7 +114,7 @@ $(function () {
     }
 
     function validarAppEditar3() {
-        let descripcion=$(".descripcion");
+        var descripcion=$(".descripcion");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarapp").validate();
 

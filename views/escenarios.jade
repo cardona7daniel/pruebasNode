@@ -4,15 +4,12 @@ block content
     h1#h1App ESCENARIOS
 
     div#modalEscenario
-
     .container
         div#form
             form(action='/crearescenario', method='get')
                 input.btn.btn-primary.newApp(value='Nuevo Escenario', type='submit')
-            form(action='/pasos', method='get')
-                input.btn.btn-success.continuar(value='Pasos', type='submit')
-            form(action='/', method='get')
-                input.btn.btn-info(value='Regresar', type='submit')
+            a(href='javascript:window.history.back();')
+                button.btn.btn-info(type='submit') Aplicaciones
         hr(size='2px', style='border-top: 2px solid #eee')
 
     table#tablaApp.table.escenario.table-striped
@@ -20,9 +17,25 @@ block content
             tr
                 th
                 th Nombre
+                th
                 th URL
                 th Opciones
         tbody
+        each s in info
+            tr.fila
+                td
+                    form(action='/mochawesome.html', target='_blank', method='get')
+                        button.btn.btn-default(id='#', type='submit', data-toggle='tooltip', title='Iniciar')
+                            span.glyphicon.glyphicon-play.text-primary.align-center
+                td.nombreEscenario #{s.nombre}
+                td
+                    a.siguiente(href='/pasos/#{s.nombre}') Pasos
+                td #{s.url}
+                td
+                    form.a(action='/eliminarescenario/#{s.idEsc}' method='post')
+                        a.eliminar(href='javascript:void(0)' onclick='if(confirm(\"Desea eliminar este registro?\")){this.parentNode.submit()}') Eliminar
+                    a.separador(href='/editarescenario/#{s.idEsc}') Editar
+
 
 
 

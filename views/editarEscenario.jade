@@ -5,7 +5,7 @@ block content
 
     .container
         form#editarescenario(action='/editarescenario', method='post')
-            input(type='hidden',name='id',value='#{info[0].id}')
+            input(type='hidden',name='id',value='#{info[0].idEsc}')
             .form-group
                 label(for='nombre') Nombre
 
@@ -18,5 +18,5 @@ block content
 
             button.btn.btn-primary.eEscenarios(style='margin-bottom: 10px', type='submit') Guardar
 
-        form(action='/escenarios')
+        a(href='javascript:window.history.back();')
             button.btn.btn-default(type='submit') Cancelar

@@ -40,7 +40,7 @@ h1#h1App{
 }
 
 #tablaPasos{
-    margin-top: 3%;
+    margin-top: 2%;
 
 }
 
@@ -81,17 +81,16 @@ a.eliminar:hover{
 }
 
 div.container{
-    margin-top: 4%;
+    margin-top: 3%;
 }
 
 
 
-#alerta{
-    position: fixed;
-    right: 10%;
-    display: none;
-
-}
+/*#alerta{*/
+    /*position: fixed;*/
+    /*right: 10%;*/
+    /*display: none;*/
+/*}*/
 
 #gPasos{
     color: #2922ff;
@@ -104,4 +103,13 @@ div.container{
 .borderp{
     border-color: red !important;
 }
+
+.siguiente{
+    color: #220eff;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
 

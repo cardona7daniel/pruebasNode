@@ -15,7 +15,7 @@ block content
                 input#valor.form-control.valor(type='text', placeholder='Valor', name='valor', value='#{info[0].valor}')
 
             .form-group
-                label(for='Tipo') Valor
+                label(for='Tipo') Tipo
                 select#tipo.form-control.tipo(name='tipo')
                     option(value='#{info[0].tipo}') #{info[0].tipo}
                     option Check_Box
@@ -30,5 +30,5 @@ block content
 
             button.ePasos.btn.btn-primary(style='margin-bottom: 10px', type='submit') Guardar
 
-        form(action='/pasos')
+        a(href='javascript:window.history.back();')
             button.btn.btn-default(type='submit') Cancelar

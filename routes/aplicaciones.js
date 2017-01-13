@@ -29,7 +29,7 @@ modelApp.getAll=function (callback) {
             }
             else
             {
-                console.log(result);
+
                 callback(null, result);
             }
         });
@@ -41,7 +41,7 @@ modelApp.getApp = function(id,callback)
     if (connection)
     {
 
-        connection.query('SELECT * FROM aplicaciones WHERE id = ?', [id], function(error, result)
+        connection.query('SELECT * FROM aplicaciones WHERE ide = ?', [id], function(error, result)
         {
             if(error)
             {
@@ -49,7 +49,7 @@ modelApp.getApp = function(id,callback)
             }
             else
             {
-                console.log(result);
+
                 callback(null, result);
             }
         });
@@ -64,7 +64,6 @@ modelApp.insertApp = function(data,callback) {
             }
             else {
                 //devolvemos la última id insertada
-                console.log(result);
                 callback(null, result);
             }
         });
@@ -75,14 +74,13 @@ modelApp.insertApp = function(data,callback) {
 
 modelApp.updateApp = function(data, callback)
 {
-    //console.log(userData); return;
+
     if(connection)
     {
-        connection.query("UPDATE aplicaciones SET nombre=?, descripcion=? WHERE  id=? ", [data.nombre, data.descripcion, data.id],function(error, result){
+        connection.query("UPDATE aplicaciones SET nombre=?, descripcion=? WHERE  ide=? ", [data.nombre, data.descripcion, data.id],function(error, result){
                 if(error){
                     throw error;
                 }else{
-                    console.log(result);
                     callback(null, {"msg": "Success"});
                 }
             }
@@ -95,16 +93,15 @@ modelApp.deleteApp = function(id, callback)
     if(connection)
     {
 
-        connection.query('SELECT * FROM aplicaciones WHERE id = ?', [id], function(err, row)
+        connection.query('SELECT * FROM aplicaciones WHERE ide = ?', [id], function(err, row)
         {
             //si existe la id de la app a eliminar
             if(row)
             {
-                connection.query("DELETE FROM aplicaciones WHERE id=? ", [id],function(error, result){
+                connection.query("DELETE FROM aplicaciones  WHERE ide=? ", [id],function(error, result){
                         if(error){
                             throw error;
                         }else{
-                            console.log(result);
                             callback(null, result);
                         }
                     }
@@ -118,6 +115,8 @@ modelApp.deleteApp = function(id, callback)
         });
     }
 };
+
+
 
 
 module.exports = modelApp;

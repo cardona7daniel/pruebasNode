@@ -23,7 +23,7 @@ module.exports = function(app){
         // res.redirect("/");
         //creamos un objeto con los datos a insertar del usuario
         var formularioData = {
-            id : null,
+            ide : null,
             nombre : req.body.nombre,
             descripcion : req.body.descripcion
         };
@@ -66,31 +66,24 @@ module.exports = function(app){
     app.get("/edit/:id", function(req, res){
 
         var id = req.params.id;
-        //solo actualizamos si la id es un número
-        if(!isNaN(id))
+
+        modelApp.getApp(id,function(error, data)
         {
-            modelApp.getApp(id,function(error, data)
+            //si existe la app mostramos el formulario
+            if (typeof data !== 'undefined' && data.length > 0)
             {
-                //si existe la app mostramos el formulario
-                if (typeof data !== 'undefined' && data.length > 0)
-                {
-                    res.render("editarapp",{
-                        title : "Editar",
-                        info : data
-                    });
-                }
-                //en otro caso mostramos un error
-                else
-                {
-                    res.json(404,{"msg":"notExist"});
-                }
-            });
-        }
-        //si la id no es numerica mostramos un error de servidor
-        else
-        {
-            res.json(500,{"msg":"El ID debe ser numerico"});
-        }
+                res.render("editarapp",{
+                    title : "Editar",
+                    info : data
+                });
+            }
+            //en otro caso mostramos un error
+            else
+            {
+                res.json(404,{"msg":"notExist"});
+            }
+        });
+
     });
 
     app.post("/editarapp", function(req,res)
@@ -122,7 +115,7 @@ module.exports = function(app){
         }
     });
 
-    app.post("/eliminarpaso/:id", function (req, res) {
+    app.get("/eliminarpaso/:id", function (req, res) {
         var id = req.params.id;
 
         modelApp.deleteApp(id,function(error, data)
@@ -141,37 +134,57 @@ module.exports = function(app){
     //_______________________________________________________________________________________________
 
     //ESCENARIOS::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+    var name;
+    var datosEscenario;
+    app.get("/escenarios/:name", function (req, res) {
 
-    app.get("/apiescenarios", function(req,res){
-        modelEscenarios.getAll(function(error, data)
+        name = req.params.name;
+
+        modelEscenarios.getEscenariosApp(name,function(error, data)
         {
-            res.json(200,data);
+            if (typeof data !== 'undefined' && data.length>0)
+            {
+                res.render("escenarios",{
+                    title : "Escenarios",
+                    info:data
+                });
+                datosEscenario=data;
+            }
+            else if (typeof data !== 'undefined' && data.length==0)
+            {
+                modelEscenarios.getEscenariosApp2(name,function(error, data2){
+                    res.render("escenarios",{
+                        title : "Escenarios",
+                        info:data2
+                    });
+                    console.log(data2);
+                    datosEscenario=data2;
+                });
+            }
+            else
+            {
+                res.json(404,{"msg":"notExist"});
+            }
+
         });
-    });
 
 
-
-
-
-
-    app.get('/escenarios', function (req, res) {
-        res.render('escenarios', {
-            title: "Escenarios"
-        });
     });
 
     app.get('/crearescenario', function (req, res) {
+        console.log(datosEscenario);
         res.render('crearEscenario', {
-            title: "Crear escenario"
+            title: "Crear escenario",
+            info:datosEscenario
         });
     });
 
     app.post("/guardarescenario", function (req, res) {
         var formularioData = {
-            id:null,
+            idEsc:null,
             nombre : req.body.nombre,
             url : req.body.url,
-            nombreApp: 'Sofasa'
+            idApp: req.body.idApp
         };
 
         if(req.body.nombre != "" && req.body.url != ""){
@@ -181,7 +194,7 @@ module.exports = function(app){
                 //si el usuario se ha insertado correctamente mostramos su info
                 if(data)
                 {
-                    res.redirect("/escenarios");
+                    res.redirect('/escenarios/'+ name);
                 }
                 else
                 {
@@ -190,17 +203,16 @@ module.exports = function(app){
             });
         }
         else{
-            res.redirect("escenarios");
+            res.redirect('/escenarios/'+ name);
         }
-
     });
 
-    // app.get("/apiescenarios", function(req,res){
-    //         modelEscenarios.getAll(function(error, data)
-    //         {
-    //             res.json(200,data);
-    //         });
-    //     });
+    app.get("/apiescenarios", function(req,res){
+            modelEscenarios.getAll(function(error, data)
+            {
+                res.json(200,data);
+            });
+        });
 
 
     app.get("/editarescenario/:id", function(req, res){
@@ -240,7 +252,7 @@ module.exports = function(app){
                 //si el usuario se ha actualizado correctamente mostramos un mensaje
                 if(data)
                 {
-                    res.redirect("/escenarios");
+                    res.redirect("/escenarios/" + name);
                 }
                 else
                 {
@@ -249,18 +261,18 @@ module.exports = function(app){
             });
         }
         else{
-            res.redirect("/escenarios");
+            res.redirect("/escenarios/" + name);
         }
     });
 
-    app.post("/eliminarescenario/:id", function (req, res) {
+    app.get("/eliminarescenario/:id", function (req, res) {
         var id = req.params.id;
 
         modelEscenarios.deleteEscenario(id,function(error, data)
         {
             if(data)
             {
-                res.redirect("/escenarios");
+                res.redirect("/escenarios/" + name);
             }
             else
             {
@@ -269,25 +281,48 @@ module.exports = function(app){
         });
     });
 
+//     //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// //                                                              PASOS
+//
+    var datosApp;
+    app.get("/pasos/:name", function (req, res) {
 
+        name = req.params.name;
 
-    //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//                                                              PASOS
-
-    app.get('/pasos', function (req, res) {
-        res.render('pasos', {
-            title: "Pasos"
+        modelPasos.getPasosEscenarios(name,function(error, data)
+        {
+            if (typeof data !== 'undefined' && data.length>0)
+            {
+                datosApp=data;
+                res.render("pasos",{
+                    title : "Pasos",
+                    info:data
+                });
+            }
+            else if(typeof data !== 'undefined' && data.length==0){
+                modelPasos.getPasosEscenarios2(name,function(error, data2){
+                    datosApp=data2;
+                    res.render("pasos",{
+                        title : "Pasos",
+                        info:data2
+                    });
+                });
+            }
+            else
+            {
+                res.json(404,{"msg":"notExist"});
+            }
         });
     });
 
     app.post("/guardarpasos", function (req, res) {
+        console.log(datosApp);
         var formularioData = {
             id:null,
             elemento : req.body.elemento,
             valor : req.body.valor,
             tipo: req.body.tipo,
-            nombre: 'crear',
-
+            idEscenario: req.body.idEscenario
         };
 
         if(req.body.tipo == "Click" || req.body.tipo == "See"){
@@ -299,7 +334,7 @@ module.exports = function(app){
                     //si el usuario se ha insertado correctamente mostramos su info
                     if(data)
                     {
-                        res.redirect("/pasos");
+                        res.redirect("/pasos/" + name);
                     }
                     else
                     {
@@ -308,7 +343,7 @@ module.exports = function(app){
                 });
             }
             else{
-                res.redirect("/pasos");
+                res.redirect("/pasos/" + name);
             }
 
         }
@@ -319,7 +354,7 @@ module.exports = function(app){
                     //si el usuario se ha insertado correctamente mostramos su info
                     if(data)
                     {
-                        res.redirect("/pasos");
+                        res.redirect("/pasos/" + name);
                     }
                     else
                     {
@@ -328,24 +363,24 @@ module.exports = function(app){
                 });
             }
             else{
-                res.redirect("/pasos");
+                res.redirect("/pasos/" + name);
             }
         }
         else{
-            res.redirect("/pasos");
+            res.redirect("/pasos/" + name);
         }
 
 
     });
 
-    app.post("/eliminar/:id", function (req, res) {
+    app.get("/eliminar/:id", function (req, res) {
         var id = req.params.id;
 
         modelPasos.deletePasos(id,function(error, data)
         {
             if(data)
             {
-                res.redirect("/pasos");
+                res.redirect("/pasos/" + name);
             }
             else
             {
@@ -391,6 +426,8 @@ module.exports = function(app){
             elemento: req.body.elemento,
             valor: req.body.valor,
             tipo: req.body.tipo
+
+
         };
 
         if(req.body.tipo == "Click" || req.body.tipo == "See") {
@@ -400,7 +437,7 @@ module.exports = function(app){
                 modelPasos.updatePasos(userData, function (error, data) {
                     //si el usuario se ha actualizado correctamente mostramos un mensaje
                     if (data) {
-                        res.redirect("/pasos");
+                        res.redirect("/pasos/" + name);
                     }
                     else {
                         res.json(500, error);
@@ -409,7 +446,7 @@ module.exports = function(app){
 
             }
             else{
-                res.redirect("/pasos");
+                res.redirect("/pasos/" + name);
             }
         }
         else if(req.body.tipo != "Click" && req.body.tipo != "See"){
@@ -419,7 +456,7 @@ module.exports = function(app){
                     //si el usuario se ha insertado correctamente mostramos su info
                     if(data)
                     {
-                        res.redirect("/pasos");
+                        res.redirect("/pasos/" + name);
                     }
                     else
                     {
@@ -428,16 +465,11 @@ module.exports = function(app){
                 });
             }
             else{
-                res.redirect("/pasos");
+                res.redirect("/pasos/" + name);
             }
         }
         else{
-            res.redirect("/pasos");
+            res.redirect("/pasos/" + name);
         }
-
     });
-
-
-
-
 };

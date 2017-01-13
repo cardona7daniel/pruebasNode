@@ -1,8 +1,8 @@
 $(function () {
 
     function validarPasosGuardar() {
-        let valor=$("#valor");
-        let elemento=$("#elemento");
+        var valor=$("#valor");
+        var elemento=$("#elemento");
 
         jQuery.validator.messages.required= 'Al menos un campo es obligatorio.';
         $("#guardarPasos").validate();
@@ -21,8 +21,8 @@ $(function () {
     }
 
     function validarPasosGuardar2(){
-        let valor=$("#valor");
-        let elemento=$("#elemento");
+        var valor=$("#valor");
+        var elemento=$("#elemento");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#guardarPasos").validate();
 
@@ -38,7 +38,7 @@ $(function () {
     }
 
     function validarPasosGuardar3(){
-        let elemento=$("#elemento");
+        var elemento=$("#elemento");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#guardarPasos").validate();
 
@@ -49,7 +49,7 @@ $(function () {
     }
 
     function validarPasosGuardar4(){
-        let valor=$("#valor");
+        var valor=$("#valor");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#guardarPasos").validate();
 
@@ -61,8 +61,8 @@ $(function () {
 
 
     function validarPasosEditar() {
-        let valor=$(".valor");
-        let elemento=$(".elemento");
+        var valor=$(".valor");
+        var elemento=$(".elemento");
 
         jQuery.validator.messages.required= 'Al menos un campo es obligatorio.';
         $("#editarPasos").validate();
@@ -81,8 +81,8 @@ $(function () {
     }
 
     function validarPasosEditar2(){
-        let valor=$(".valor");
-        let elemento=$(".elemento");
+        var valor=$(".valor");
+        var elemento=$(".elemento");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarPasos").validate();
 
@@ -98,7 +98,7 @@ $(function () {
     }
 
     function validarPasosEditar3(){
-        let elemento=$(".elemento");
+        var elemento=$(".elemento");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarPasos").validate();
 
@@ -109,7 +109,7 @@ $(function () {
     }
 
     function validarPasosEditar4(){
-        let valor=$(".valor");
+        var valor=$(".valor");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarPasos").validate();
 
@@ -121,9 +121,9 @@ $(function () {
 
 
     $("#gPasos").click(function () {
-        let tipo=$("#tipo");
-        let valor=$("#valor");
-        let elemento=$("#elemento");
+        var tipo=$("#tipo");
+        var valor=$("#valor");
+        var elemento=$("#elemento");
 
         if (tipo.val() == "Click" || tipo.val() == "See") {
             if (elemento.val() == "" && valor.val() == "") {
@@ -150,9 +150,9 @@ $(function () {
     });
 
     $(".ePasos").click(function () {
-        let tipo=$(".tipo");
-        let valor=$(".valor");
-        let elemento=$(".elemento");
+        var tipo=$(".tipo");
+        var valor=$(".valor");
+        var elemento=$(".elemento");
 
         if (tipo.val() == "Click" || tipo.val() == "See") {
             if (elemento.val() == "" && valor.val() == "") {

@@ -1,8 +1,8 @@
 
 $(function () {
     $("#gEscenarios").click(function () {
-        let nombre=$("#nombre");
-        let url=$("#url");
+        var nombre=$("#nombre");
+        var url=$("#url");
 
         if (nombre.val() == "" && url.val() == "") {
             nombre.addClass("required borderp");
@@ -21,8 +21,8 @@ $(function () {
     });
 
     function validarEscenariosGuardar() {
-        let nombre=$("#nombre");
-        let url=$("#url");
+        var nombre=$("#nombre");
+        var url=$("#url");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearescenario").validate();
 
@@ -38,7 +38,7 @@ $(function () {
     }
 
     function validarEscenariosGuardar2() {
-        let nombre=$("#nombre");
+        var nombre=$("#nombre");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearescenario").validate();
 
@@ -49,7 +49,7 @@ $(function () {
     }
 
     function validarEscenariosGuardar3() {
-        let url=$("#url");
+        var url=$("#url");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#crearescenario").validate();
 
@@ -60,8 +60,8 @@ $(function () {
     }
 
     $(".eEscenarios").click(function () {
-        let nombre=$(".nombre");
-        let url=$(".uri");
+        var nombre=$(".nombre");
+        var url=$(".uri");
 
         if (nombre.val() == "" && url.val() == "") {
             nombre.addClass("required borderp");
@@ -80,8 +80,8 @@ $(function () {
     });
 
     function validarEscenariosEditar() {
-        let nombre=$(".nombre");
-        let url=$(".uri");
+        var nombre=$(".nombre");
+        var url=$(".uri");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarescenario").validate();
 
@@ -97,7 +97,7 @@ $(function () {
     }
 
     function validarEscenariosEditar2() {
-        let nombre=$(".nombre");
+        var nombre=$(".nombre");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarescenario").validate();
 
@@ -108,7 +108,7 @@ $(function () {
     }
 
     function validarEscenariosEditar3() {
-        let url=$(".url");
+        var url=$(".url");
         jQuery.validator.messages.required= 'Este campo es obligatorio.';
         $("#editarescenario").validate();
 

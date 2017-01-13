@@ -22,7 +22,6 @@ modelPasos.getAll=function (callback) {
             }
             else
             {
-                console.log(result);
                 callback(null, result);
             }
         });
@@ -42,7 +41,6 @@ modelPasos.getPasos = function(id,callback)
             }
             else
             {
-                console.log(result);
                 callback(null, result);
             }
         });
@@ -57,7 +55,6 @@ modelPasos.insertPasos = function(data,callback) {
             }
             else {
                 //devolvemos la última id insertada
-                console.log(result);
                 callback(null, result);
             }
         });
@@ -68,14 +65,13 @@ modelPasos.insertPasos = function(data,callback) {
 
 modelPasos.updatePasos = function(data, callback)
 {
-    //console.log(userData); return;
+
     if(connection)
     {
-        connection.query("UPDATE pasos SET elemento=?, valor=?, tipo=?, nombre=? WHERE  id=? ", [data.elemento, data.valor, data.tipo, data.nombre, data.id],function(error, result){
+        connection.query("UPDATE pasos SET elemento=?, valor=?, tipo=? WHERE  id=? ", [data.elemento, data.valor, data.tipo, data.id],function(error, result){
                 if(error){
                     throw error;
                 }else{
-                    console.log(result);
                     callback(null, {"msg": "Success"});
                 }
             }
@@ -97,7 +93,6 @@ modelPasos.deletePasos = function(id, callback)
                         if(error){
                             throw error;
                         }else{
-                            console.log(result);
                             callback(null, result);
                         }
                     }
@@ -111,14 +106,43 @@ modelPasos.deletePasos = function(id, callback)
     }
 };
 
-modelPasos.getEscenariosPasos=function (id, callback) {
-    if(connection){
-        connection.query('SELECT pasos.elemento, pasos.valor, pasos.tipo FROM pasos  JOIN escenarios  ON pasos.nombre = escenarios.nombre WHERE escenarios.id=?', [id], function(err, result){
-            if(error){
+
+
+modelPasos.getPasosEscenarios = function(name,callback)
+{
+    if (connection)
+    {
+
+        connection.query('SELECT p.id, p.elemento, p.valor, p.tipo, e.idEsc FROM pasos p INNER JOIN escenarios e ON e.idEsc = p.idEscenario  WHERE e.nombre=?', [name], function(error, result)
+        {
+            if(error)
+            {
                 throw error;
-            }else{
-                console.log(result);
-                callback(null, {"msg": "Success"});
+            }
+            else
+            {
+                callback(null, result);
+            }
+        });
+
+
+    }
+};
+
+modelPasos.getPasosEscenarios2 = function(name,callback)
+{
+    if (connection)
+    {
+
+        connection.query('SELECT idEsc FROM escenarios WHERE nombre=?', [name], function(error, result)
+        {
+            if(error)
+            {
+                throw error;
+            }
+            else
+            {
+                callback(null, result);
             }
         });
     }

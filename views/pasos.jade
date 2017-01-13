@@ -6,32 +6,29 @@ block content
     div#modalPasos
 
     .container
-        form(action='/escenarios', method='get')
-            input.btn.btn-info(value='Regresar', type='submit')
+        a(href='javascript:window.history.back();')
+            button.btn.btn-info(type='submit') Escenarios
         hr(size='2px', style='border-top: 2px solid #eee')
 
-
     form#guardarPasos(action='/guardarpasos', method='post')
-        table#tablaPasos.table.pasos.table-striped
+        table#tablaPasos.table.pasos
             thead
                 tr
                     th.text-center Elemento
                     th.text-center Valor
                     th.text-center Tipo
                     th.text-center Opciones
-
-
-
+            tbody
                 tr.tr
-
-                    th
+                    input#idEsc.form-control(name='idEscenario', type='hidden', placeholder='idEscenario', value='#{info[0].idEsc}')
+                    th.anchoElemento
                         .form-group
                             input#elemento.form-control(name='elemento', type='text', placeholder='Elemento')
 
-                    th
+                    th.anchoValor
                         .form-group
                             input#valor.form-control(name='valor', type='text', placeholder='Valor')
-                    th
+                    th.anchoTipo
                         .form-group
                             select#tipo.form-control(name='tipo')
                                 option Check_Box
@@ -45,12 +42,18 @@ block content
                                 option Select
                                 option Text
 
-                    th.text-center
+                    th.text-center.anchoGuardar
                         .form-group
                             button#gPasos.gPasos.btn.btn-default(type='submit') Guardar
 
-
-
-
-            tbody
-                //Pasos
+    table.table.table-striped
+        thead
+        each s in info
+            tr.filaPaso
+                td.getElemento.text-center #{s.elemento}
+                td.getValor.text-center #{s.valor}
+                td.getTipo.tipoPaso.text-center #{s.tipo}
+                td.getGuardar.text-center
+                    form.a(action='/eliminar/#{s.id}' method='post')
+                        a.eliminar(href='javascript:void(0)' onclick='if(confirm(\"Desea eliminar este registro?\")){this.parentNode.submit()}') Eliminar
+                    a.separador(href='/editarpaso/#{s.id}') Editar
