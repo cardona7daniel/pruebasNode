@@ -113,7 +113,7 @@ modelPasos.getPasosEscenarios = function(name,callback)
     if (connection)
     {
 
-        connection.query('SELECT p.id, p.elemento, p.valor, p.tipo, e.idEsc FROM pasos p INNER JOIN escenarios e ON e.idEsc = p.idEscenario  WHERE e.nombre=?', [name], function(error, result)
+        connection.query('SELECT p.id, p.elemento, p.valor, p.tipo, e.idEsc, a.nombre FROM aplicaciones a INNER JOIN escenarios e ON a.ide= e.idApp INNER JOIN pasos p ON e.idEsc = p.idEscenario WHERE e.nombre=?', [name], function(error, result)
         {
             if(error)
             {
@@ -124,17 +124,16 @@ modelPasos.getPasosEscenarios = function(name,callback)
                 callback(null, result);
             }
         });
-
-
     }
 };
+
 
 modelPasos.getPasosEscenarios2 = function(name,callback)
 {
     if (connection)
     {
 
-        connection.query('SELECT idEsc FROM escenarios WHERE nombre=?', [name], function(error, result)
+        connection.query('SELECT e.idEsc, a.nombre FROM escenarios e INNER JOIN aplicaciones a WHERE e.nombre=?', [name], function(error, result)
         {
             if(error)
             {
@@ -146,6 +145,30 @@ modelPasos.getPasosEscenarios2 = function(name,callback)
             }
         });
     }
+};
+
+
+modelPasos.getPasosEscenariosCodecept = function(name,callback)
+{
+    if (connection)
+    {
+
+        connection.query('SELECT p.elemento, p.valor, p.tipo,  e.nombre, e.url FROM  escenarios e INNER JOIN pasos p ON e.idEsc = p.idEscenario WHERE e.nombre=?', [name], function(error, result)
+        {
+            if(error)
+            {
+                throw error;
+            }
+            else
+            {
+                callback(null, result);
+            }
+        });
+    }
+};
+
+modelPasos.connectionClose = function () {
+    connection.end();
 };
 
 module.exports = modelPasos;

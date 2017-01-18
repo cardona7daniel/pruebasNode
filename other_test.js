@@ -1,63 +1,57 @@
-var express=require("express");
 var Chance=require("chance");
 var chance = new Chance();
-var mysql = require('mysql');
-var modelEscenarios = require('./routes/escenarios');
 var modelPasos = require('./routes/pasos');
 
 
-var connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'pruebas',
-    port: 3306
+var nombre = '';
+var regEx = /nombreEsc=.+/ig;
+process.argv.forEach(function (str) {
+   if(regEx.exec(str)) {
+       nombre = str.split('=')[1];
+   }
 });
 
-var rutas;
-modelEscenarios.getAll(function (error, data) {
-    rutas=data;
-});
 var resultado;
-modelPasos.getAll(function (error, data) {
+modelPasos.getPasosEscenariosCodecept(nombre, function (error, data) {
     resultado=data;
 });
-
 
 Feature('Formulario');
 
 Before(function (I) {
-    I.amOnPage("https://www.google.com.co/");
+    modelPasos.getPasosEscenariosCodecept(nombre, function (error, data) {
+        I.amOnPage(data[0].url);
+        console.log('Scenario: ' + data[0].nombre);
+    });
 });
 
-Scenario('Crear', function(I) {
-    var name=chance.name();
-    var age=chance.age();
-    var password=chance.string({length: 7});
-    var telefono=chance.phone({ formatted: false });
-    var date=chance.date({string: true, american: false});
-    var email=chance.email();
-    var direccion=chance.address();
-    var ciudad=chance.city();
-    var year=chance.year();
+Scenario('', function(I) {
+    var random = {
+        name: chance.name(),
+        age: chance.age(),
+        password: chance.string({length: 7}),
+        telefono: chance.phone({formatted: false}),
+        date: chance.date({string: true, american: false}),
+        email: chance.email(),
+        direccion: chance.address(),
+        ciudad: chance.city(),
+        year: chance.year()
+    };
 
-
-    I.amOnPage(rutas[0].url);
     I.wait(2);
-
 
     resultado.forEach(function (element, i, array) {
         switch(array[i].tipo){
             case 'Text':
                 switch(array[i].valor){
                     case 'nombre':
-                        I.fillField(array[i].elemento, name);
+                        I.fillField(array[i].elemento, random.name);
                         break;
                     case 'direccion':
-                        I.fillField(array[i].elemento, direccion);
+                        I.fillField(array[i].elemento, random.direccion);
                         break;
                     case 'ciudad':
-                        I.fillField(array[i].elemento, ciudad);
+                        I.fillField(array[i].elemento, random.ciudad);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -67,7 +61,7 @@ Scenario('Crear', function(I) {
             case 'Password':
                 switch(array[i].valor){
                     case 'pass':
-                        I.fillField(array[i].elemento, password);
+                        I.fillField(array[i].elemento, random.password);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -80,7 +74,7 @@ Scenario('Crear', function(I) {
             case 'Date':
                 switch(array[i].valor){
                     case 'date':
-                        I.fillField(array[i].elemento, date);
+                        I.fillField(array[i].elemento, random.date);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -90,7 +84,7 @@ Scenario('Crear', function(I) {
             case 'Email':
                 switch(array[i].valor){
                     case 'email':
-                        I.fillField(array[i].elemento, email);
+                        I.fillField(array[i].elemento, random.email);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -106,13 +100,13 @@ Scenario('Crear', function(I) {
             case 'Number':
                 switch(array[i].valor){
                     case 'edad':
-                        I.fillField(array[i].elemento, age.toString());
+                        I.fillField(array[i].elemento, random.age.toString());
                         break;
                     case 'telefono':
-                        I.fillField(array[i].elemento, telefono.toString());
+                        I.fillField(array[i].elemento, random.telefono.toString());
                         break;
                     case 'year':
-                        I.fillField(array[i].elemento, year);
+                        I.fillField(array[i].elemento, random.year);
                         break;
                     default:
                         I.fillField(array[i].elemento, array[i].valor);
@@ -137,5 +131,6 @@ Scenario('Crear', function(I) {
                 break;
         }
     });
-});
 
+    modelPasos.connectionClose();
+});

@@ -3,18 +3,17 @@
   "timeout": 30000,
   "output": "./output",
   "helpers": {
-    "WebDriverIO": {
+    "WebDriverIO":
+    {
       "url": "http://localhost",
-      "browser": "chrome"
+      "browser": "chrome",
+      "windowSize": "maximize"
     }
   },
   "include": {
     "I": "./steps_file.js"
   },
   "bootstrap": false,
-  "mocha": { "reporterOptions": {
-      "reportDir": "output"
-    }
-},
+  "mocha":{},
   "name": "node"
 }

@@ -6,7 +6,7 @@ block content
     div#modalPasos
 
     .container
-        a(href='javascript:window.history.back();')
+        a(href='/escenarios/#{info[0].nombre}')
             button.btn.btn-info(type='submit') Escenarios
         hr(size='2px', style='border-top: 2px solid #eee')
 
@@ -46,8 +46,8 @@ block content
                         .form-group
                             button#gPasos.gPasos.btn.btn-default(type='submit') Guardar
 
-    table.table.table-striped
-        thead
+    table#sort.table.table-striped
+        tbody
         each s in info
             tr.filaPaso
                 td.getElemento.text-center #{s.elemento}

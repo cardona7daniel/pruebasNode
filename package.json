@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "prueba",
   "main": "app.js",
-  "dependencies": {},
+  "dependencies": {
+    "synchronize": "^2.0.0"
+  },
   "devDependencies": {
     "codeceptjs": "^0.4.13",
     "mochawesome": "^2.0.0"

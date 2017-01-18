@@ -38,10 +38,35 @@ $(function () {
         $(".getGuardar").width(guardar+"px");
     }
 
+    function focus() {
+        if($("#elemento").val()==""){
+            $("#elemento").select();
+        }else if($("#valor").val()==""){
+            $("#valor").select();
+        }
+        else{
+            $("#elemento").select();
+        }
+
+        $("#nombre").select();
+        $("#nombreE").select();
+    }
+
     window.onload=ajustar();
+    window.onload=focus();
 
     $(window).resize(function () {
         ajustar();
-    })
+    });
+
+
+    // Mover los pasos
+    $( "#sort" ).find("tbody").sortable({});
+
+    $("#gPasos").click(function () {
+        $("#elemento").focus();
+    });
+
+
 
 });

@@ -1,5 +1,6 @@
 var express=require("express");
 var mysql = require('mysql');
+var sync = require('synchronize');
 
 var connection = mysql.createConnection({
     host: 'localhost',

@@ -16,10 +16,13 @@ app.use(express.static(path.join(__dirname, 'output')));
 
 require('./routes')(app);
 
-
 app.listen(port, function () {
     console.log("Listening in port " + port);
 });
 
 module.exports=app;
+
+
+
+
 
