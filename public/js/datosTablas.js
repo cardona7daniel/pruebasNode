@@ -23,34 +23,16 @@ $(function () {
                     "</td>" +
                     "</tr>");
             });
-            // class='eliminar' data-toggle='modal' data-target='#modal'
-
-            // $("#modalApp").append("<div id='modal' class='modal fade' tabindex='-1' role='dialog'>"+
-            //     "<div class='modal-dialog'' role='document'>"+
-            //     "<div class='modal-content'>"+
-            //     "<div class='modal-header'>"+
-            //     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+
-            //     "<h4 class='modal-title'>ADVERTENCIA</h4>"+
-            //     "</div>"+
-            //     "<div class='modal-body'>"+
-            //     "<p>¿Está seguro de que desea eliminar esta aplicación?</p>"+
-            //     "</div>"+
-            //     "<div class='modal-footer'>"+
-            //     "<button type='button' class='btn btn-default' data-dismiss='modal'>Cerrar</button>"+
-            //     "<form class='a' action='/eliminarpaso/"+id+"' method='post'>"+
-            //     "<button type='submit' class='btn btn-danger' >Eliminar</button>"+
-            //     "</form>"+
-            //     "</div>"+
-            //     "</div>"+
-            //     "</div>"+
-            //     "</div>");
-
-
         },
-        error: function (Error, e, description) {
+        error: function (Error, e) {
             console.log(e);
         }
     });
+
+    // $("#verEstado").click(function () {
+    //     location.reload();
+    // });
+
 
     // $.getJSON("/aplicaciones", function(data){
     // let id=0;
@@ -123,30 +105,6 @@ $(function () {
     //
     //     $('[data-toggle="tooltip"]').tooltip();
     // });
-    //
-    //
-    // $.getJSON("/apipasos", function(data){
-    //
-    //     $.each(data, function(i, v){
-    //         $("#formulario").append(
-    //             "<td class='text-center'>" +
-    //             "<form action='/eliminar/"+v.id+"' method='post' class='a'>" +
-    //             "<a class='eliminar' href='javascript:void(0)' onclick='if(confirm(\"Desea eliminar este registro?\")){this.parentNode.submit()}'>Eliminar</a>"+
-    //             "</form>"+
-    //             "<a class='separador' href='/editarpaso/"+v.id+"'>Editar</a>"+
-    //             "</td>"
-    //         )
-    //     });
-    //
-    //
-    // });
-
-
-
-
-
-
-
 
 
 

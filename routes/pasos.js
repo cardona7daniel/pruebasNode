@@ -15,7 +15,7 @@ var modelPasos={};
 modelPasos.getAll=function (callback) {
     if (connection)
     {
-        connection.query('SELECT * FROM pasos', function(error, result) {
+        connection.query('SELECT DISTINCT e.nombre FROM pasos p INNER JOIN escenarios e ON e.idEsc=p.idEscenario', function(error, result) {
             if(error)
             {
                 throw error;
@@ -79,6 +79,21 @@ modelPasos.updatePasos = function(data, callback)
     }
 };
 
+modelPasos.updatePasosOrganizados = function(data, callback)
+{
+    if(connection)
+    {
+        connection.query("UPDATE pasos SET elemento=?, valor=?, tipo=?, ordenar=? WHERE id=3",  [data.elemento, data.valor, data.tipo, data.orden],function(error, result){
+                if(error){
+                    throw error;
+                }else{
+                    callback(null, {"msg": "Success"});
+                }
+            }
+        );
+    }
+};
+
 modelPasos.deletePasos = function(id, callback)
 {
     if(connection)
@@ -113,7 +128,7 @@ modelPasos.getPasosEscenarios = function(name,callback)
     if (connection)
     {
 
-        connection.query('SELECT p.id, p.elemento, p.valor, p.tipo, e.idEsc, a.nombre FROM aplicaciones a INNER JOIN escenarios e ON a.ide= e.idApp INNER JOIN pasos p ON e.idEsc = p.idEscenario WHERE e.nombre=?', [name], function(error, result)
+        connection.query('SELECT p.id, p.elemento, p.valor, p.tipo, p.ordenar, e.idEsc, a.nombre FROM aplicaciones a INNER JOIN escenarios e ON a.ide= e.idApp INNER JOIN pasos p ON e.idEsc = p.idEscenario WHERE e.nombre=?', [name], function(error, result)
         {
             if(error)
             {

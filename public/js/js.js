@@ -16,7 +16,7 @@ $(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    //           SUBIR LOS TH DE LA TABLA DE PASOS
+    // SUBIR LOS TH DE LA TABLA DE PASOS
     $(".tr").find("th").css("vertical-align", "top");
 
     if($(".nombreEscenario").html()==""){
@@ -60,12 +60,72 @@ $(function () {
     });
 
 
-    // Mover los pasos
-    $( "#sort" ).find("tbody").sortable({});
+    var posicionesPasos=[];
+    // Mover u ordenar los pasos
+    $( "#sort" ).find("tbody").sortable({
+        update: function (ev, ui) {
+            $("#sort").find("tr").each(function (i, v) {
+                $(".inputOrdenar").eq(i).val(i+1);
+                posicionesPasos.push(i);
+
+            });
+            var datos={};
+            var datosArray=[];
+            $("#sort").find("tr").each(function (i, v) {
+                datos={};
+                datos.id=$(".inputId").eq(i).val();
+                datos.elemento = $(".getElemento").eq(i).html();
+                datos.valor = $(".getValor").eq(i).html();
+                datos.tipo = $(".getTipo").eq(i).html();
+                datos.orden = $(".inputOrdenar").eq(i).val();
+                datosArray.push(datos);
+            });
+            var formURL = $("#formCambios").attr("action");
+            datos=JSON.stringify(datosArray);
+
+            $.ajax({
+                method: 'post',
+                url: formURL,
+                data: {datos},
+                dataType: "json"
+            }).done(function (data) {
+                alert(data);
+            }).fail(function (e) {
+                console.log(e);
+            });
+
+        }
+    });
+
+    // $('#actualizar').click(function(ev) {
+    //     ev.preventDefault();
+    //
+    //
+    //
+    // });
+
+    function asignarOrden() {
+        $("#sort").find("tr").each(function (i, v) {
+            $(".inputOrdenar").eq(i).val(i+1);
+        });
+    }
+
+    window.onload=asignarOrden();
 
     $("#gPasos").click(function () {
         $("#elemento").focus();
     });
+
+/// Disabled button "Ver estado de la prueba"
+    if($("#okey").html()==""){
+        $( "#verEstado" ).prop( "disabled", true );
+    }else if($("#okey").html()!=""){
+        $( "#verEstado" ).removeAttr( "disabled");
+    }else if($("#error").html()==""){
+        $( "#verEstado" ).prop( "disabled", true );
+    }else{
+        $( "#verEstado" ).removeAttr( "disabled");
+    }
 
 
 

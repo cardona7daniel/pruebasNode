@@ -1,11 +1,7 @@
-var express=require('express');
 var exec = require('child_process');
 var modelApp = require('./aplicaciones');
 var modelEscenarios = require('./escenarios');
 var modelPasos = require('./pasos');
-
-
-
 
 
 var name="";
@@ -136,7 +132,7 @@ module.exports=function (app) {
                 res.render("escenarios", {
                     title: "Escenarios",
                     info: data,
-                    ok: MessageOk,
+                    okey: MessageOk,
                     error: MessageError
                 });
                 datosEscenario = data;
@@ -146,7 +142,7 @@ module.exports=function (app) {
                     res.render("escenarios", {
                         title: "Escenarios",
                         info: data2,
-                        ok: MessageOk,
+                        okey: MessageOk,
                         error: MessageError
                     });
                     console.log(data2);
@@ -163,9 +159,7 @@ module.exports=function (app) {
     app.get('/crearescenario', function (req, res) {
         res.render('crearEscenario', {
             title: "Crear escenario",
-            info: datosEscenario,
-            ok: MessageOk,
-            error: MessageError
+            info: datosEscenario
         });
     });
 
@@ -182,10 +176,7 @@ module.exports=function (app) {
             modelEscenarios.insertEscenario(formularioData, function (error, data) {
                 //si el usuario se ha insertado correctamente mostramos su info
                 if (data) {
-                    res.redirect('/escenarios/' + name, {
-                        ok: MessageOk,
-                        error: MessageError
-                    });
+                    res.redirect('/escenarios/' + name);
                 }
                 else {
                     res.json(500, {"msg": "Error"});
@@ -193,10 +184,7 @@ module.exports=function (app) {
             });
         }
         else {
-            res.redirect('/escenarios/' + name, {
-                ok: MessageOk,
-                error: MessageError
-            });
+            res.redirect('/escenarios/' + name);
         }
     });
 
@@ -206,18 +194,13 @@ module.exports=function (app) {
         var name2 = req.params.name;
         exec.exec('c: && cd C:\\Users\\ldcardona\\Desktop\\node && codeceptjs run . other_test.js "nombreEsc=' + name2 + '" ',
             function (error, stdout, stderr) {
-                if (error) {
-                    console.error(error);
-                    throw error;
-                }
                 console.log('stdout ', stdout);
                 MessageOk = stdout;
                 console.log('stderr ', stderr);
                 MessageError = stderr;
+                res.redirect('/escenarios/' + name);
             });
-        res.redirect('/escenarios/' + name);
     });
-
 
     app.get("/apiescenarios", function (req, res) {
         modelEscenarios.getAll(function (error, data) {
@@ -314,10 +297,20 @@ module.exports=function (app) {
         });
     });
 
+    app.post('/guardarcambios', function (req, res) {
+        var data=req.body;
+        console.log(data);
+        res.status(200).json(data);
+
+
+        // modelPasos.updatePasosOrganizados(data, function (error, data) {
+        //  res.redirect("/pasos/" + name);
+        // });
+    });
+
     app.post("/guardarpasos", function (req, res) {
-        console.log(datosApp);
         var formularioData = {
-            id: null,
+            id: req.body.idPaso,
             elemento: req.body.elemento,
             valor: req.body.valor,
             tipo: req.body.tipo,
@@ -366,6 +359,8 @@ module.exports=function (app) {
 
     });
 
+
+
     app.post("/eliminar/:id", function (req, res) {
         var id = req.params.id;
 
@@ -412,8 +407,6 @@ module.exports=function (app) {
             elemento: req.body.elemento,
             valor: req.body.valor,
             tipo: req.body.tipo
-
-
         };
 
         if (req.body.tipo == "Click" || req.body.tipo == "See") {
@@ -429,7 +422,6 @@ module.exports=function (app) {
                         res.json(500, error);
                     }
                 });
-
             }
             else {
                 res.redirect("/pasos/" + name);
@@ -438,7 +430,6 @@ module.exports=function (app) {
         else if (req.body.tipo != "Click" && req.body.tipo != "See") {
             if (req.body.elemento != "" && req.body.valor != "") {
                 modelPasos.updatePasos(userData, function (error, data) {
-                    //si el usuario se ha insertado correctamente mostramos su info
                     if (data) {
                         res.redirect("/pasos/" + name);
                     }
@@ -455,4 +446,15 @@ module.exports=function (app) {
             res.redirect("/pasos/" + name);
         }
     });
+
+
+
+
+
+
+
+
+
+
+
 };

@@ -8,6 +8,8 @@ block content
     .container
         a(href='/escenarios/#{info[0].nombre}')
             button.btn.btn-info(type='submit') Escenarios
+        form#formCambios(action='/guardarcambios', method='post', style='float: right')
+            button#actualizar.btn.btn-info(type='submit') Actualizar cambios
         hr(size='2px', style='border-top: 2px solid #eee')
 
     form#guardarPasos(action='/guardarpasos', method='post')
@@ -17,14 +19,15 @@ block content
                     th.text-center Elemento
                     th.text-center Valor
                     th.text-center Tipo
+                    th.text-center
                     th.text-center Opciones
+
             tbody
                 tr.tr
                     input#idEsc.form-control(name='idEscenario', type='hidden', placeholder='idEscenario', value='#{info[0].idEsc}')
                     th.anchoElemento
                         .form-group
                             input#elemento.form-control(name='elemento', type='text', placeholder='Elemento')
-
                     th.anchoValor
                         .form-group
                             input#valor.form-control(name='valor', type='text', placeholder='Valor')
@@ -42,6 +45,10 @@ block content
                                 option Select
                                 option Text
 
+                    th.anchoValor
+                        .form-group
+                            input.form-control(name='ordenar2', type='hidden', placeholder='Ordenar')
+
                     th.text-center.anchoGuardar
                         .form-group
                             button#gPasos.gPasos.btn.btn-default(type='submit') Guardar
@@ -49,10 +56,16 @@ block content
     table#sort.table.table-striped
         tbody
         each s in info
-            tr.filaPaso
+            tr#filaPaso.filaPaso.ordenar
+                td.text-center
+                    .form-group
+                        input.inputId.form-control(name='idPaso', type='hidden', placeholder='Id', value='#{s.id}')
                 td.getElemento.text-center #{s.elemento}
                 td.getValor.text-center #{s.valor}
                 td.getTipo.tipoPaso.text-center #{s.tipo}
+                td.text-center
+                    .form-group
+                        input.inputOrdenar.form-control(name='ordenar', type='hidden', placeholder='Ordenar', value='#{s.ordenar}')
                 td.getGuardar.text-center
                     form.a(action='/eliminar/#{s.id}' method='post')
                         a.eliminar(href='javascript:void(0)' onclick='if(confirm(\"Desea eliminar este registro?\")){this.parentNode.submit()}') Eliminar

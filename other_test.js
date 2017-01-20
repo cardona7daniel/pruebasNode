@@ -16,7 +16,7 @@ modelPasos.getPasosEscenariosCodecept(nombre, function (error, data) {
     resultado=data;
 });
 
-Feature('Formulario');
+Feature('');
 
 Before(function (I) {
     modelPasos.getPasosEscenariosCodecept(nombre, function (error, data) {

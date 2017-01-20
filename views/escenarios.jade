@@ -2,7 +2,6 @@ extends layout
 
 block content
     h1#h1App ESCENARIOS
-
     div#modalEscenario
         #modal.modal.fade(tabindex='-1', role='dialog')
             .modal-dialog(role='document')
@@ -10,20 +9,23 @@ block content
                     .modal-header
                         button.close(type='button', data-dismiss='modal', aria-label='Close')
                             span(aria-hidden='true') &times;
+                        h4.modal-title STATE
                     .modal-body
-                        p#resultadoCodecept
+                        p#okey #{okey}
+                        p#error #{error}
 
                     .modal-footer
                         button.btn.btn-primary(type='button', data-dismiss='modal') OK
 
     .container
-        button.ir(data-toggle='modal' data-target='#modal') ddddd
         div#form
             form(action='/crearescenario', method='get')
                 input.btn.btn-primary.newApp(value='Nuevo Escenario', type='submit')
             a(href='/')
                 button.btn.btn-info(type='submit') Aplicaciones
         hr(size='2px', style='border-top: 2px solid #eee')
+
+        button#verEstado.btn.btn-success(data-toggle='modal', data-target='#modal') Ver estado de la prueba
 
     table#tablaApp.table.escenario.table-striped
         thead
@@ -42,7 +44,7 @@ block content
                             span.glyphicon.glyphicon-play.text-primary.align-center
                 td.nombreEscenario #{s.nombre}
                 td
-                    a.siguiente(href='/pasos/#{s.nombre}') Pasos
+                    a#siguiente.siguiente(href='/pasos/#{s.nombre}') Pasos
                 td #{s.url}
                 td
                     form.a(action='/eliminarescenario/#{s.idEsc}' method='post')

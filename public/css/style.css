@@ -4,9 +4,6 @@
     background-color: #e53935;
     color: white;
 }
-
-
-
 img{
     margin: 2% 5%;
     transition: .5s;
@@ -86,13 +83,6 @@ div.container{
 }
 
 
-
-/*#alerta{*/
-    /*position: fixed;*/
-    /*right: 10%;*/
-    /*display: none;*/
-/*}*/
-
 #gPasos{
     color: #2922ff;
 }
@@ -111,6 +101,15 @@ div.container{
 
 .table {
     margin-bottom: 0;
+}
+
+#okey{
+
+    font-weight: bold;
+}
+
+#sort tbody{
+    cursor: move;
 }
 
 @media(max-width: 992px) {
